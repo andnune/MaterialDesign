@@ -1,10 +1,3 @@
-
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 10/08/15
- * Time: 11:33
- */
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--<script src="funciones.php"></script>-->
+
     <style>
         span{
             background-color: white;
@@ -23,11 +18,17 @@
             height: auto;
             width: auto;
         }
+        #textoNoBorde{
+            text-align: center;
+            height: auto;
+            width: auto;
+            border-width:0;
+        }
     </style>
 </head>
 <body>
-<table id="tabla" align="center" border="1" cellspacing="1" cellpadding="2" style="font-size: 8pt">
-    <tr>
+<table  class='table table-bordered table-hover' id="tabla" align="center" border="1" cellspacing="1" cellpadding="2" style="font-size: 8pt">
+    <tr class='warning'>
         <td class="celda"><b>Autor</b></td>
         <td class="celda"><b>Fecha</b></td>
         <td class="celda"><b>Titulo</b></td>
@@ -40,7 +41,7 @@
             <span class="brand">blog aplicacion</span>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="newPost.php">nuevoPost</a></li>
-                <li><a>buscarPost</a></li>
+                <li><a href="searchPost.php">buscarPost</a></li>
             </ul>
         </div>
     </div>
@@ -48,8 +49,10 @@
     <br>
     <br>
     <br>
-<?php
-$server = "localhost";
+    <?php
+    require 'funciones.php';
+    //include("./funciones.php");
+/*$server = "localhost";
 $user = "root";
 $pass="9psCXanh";
 $db = "blog";
@@ -72,24 +75,29 @@ if(!$results){
     //echo "Los datos se seleccionaron correctamente\n";
    // echo "<br>";
 }
-if (mysqli_num_rows($results)==0){ echo "FALLOOOOO\n";}
+if (mysqli_num_rows($results)==0){ echo "FALLOOOOO\n";}*/
 //cargamos los resultados
-$contResults=0;
-while ($row = $results->fetch_array()) {
-//}
-//mostramos los datos
-    echo "<form action='post.php' method='post'>";
-    echo "<tr><td><input type='text' size=auto id='textoNoBorde' name='Autor' value='" .$row[0] . "' readonly></td>";
-    echo "<td id='celda'><input type='text' id='textoNoBorde' name='Fecha' value='".$row[1]."' readonly></td>";
-    echo "<td id='celda'><input type='text' id='textoNoBorde' name='Titulo' value='" .$row[2] . "' readonly></td>";
-    $textoCorto= $row[3];
-    $textoFinal = substr($textoCorto, 0,20);
-    echo "<td id='celda'><input type='text' id='textoNoBorde' name='Texto' value='" .$textoFinal . "' readonly></td>";
-    echo "<td id='celda'><button class='btn btn-default' id='boton' name='Acceder' readonly><i class='glyphicon glyphicon-eye-open'></i>Acceder</td>";
-    echo "</form>";
-}
-echo "</table";
-mysql_close($conn);
+$results = seleccTodoBlog();
+    $row_cnt = $results->num_rows;
+    if ($row_cnt > 0) {
+        while ($row = $results->fetch_array()) {
+            //}
+            //mostramos los datos
+            echo "<form action='post.php' method='post'>";
+            echo "<tr class='info'><td><input type='text' size=auto id='textoNoBorde' name='Autor' value='" . $row[0] . "' readonly></td>";
+            echo "<td id='celda'><input type='text' id='textoNoBorde' name='Fecha' value='" . $row[1] . "' readonly></td>";
+            echo "<td id='celda'><input type='text' id='textoNoBorde' name='Titulo' value='" . $row[2] . "' readonly></td>";
+            $textoCorto = $row[3];
+            $textoFinal = substr($textoCorto, 0, 20);
+            echo "<td id='celda'><input type='text' id='textoNoBorde' name='Texto' value='" . $textoFinal . "' readonly></td>";
+            echo "<td id='celda'><button class='btn btn-default' id='boton' name='Acceder' readonly><i class='glyphicon glyphicon-eye-open'></i>Acceder</td>";
+            echo "</tr>";
+            echo "</form>";
+        }
+        echo "</tr>";
+        echo "</table";
+    }
+        mysql_close($conn);
 ?>
 </body>
 </html>

@@ -29,7 +29,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index.php">Inicio</a></li>
                 <li><a href="newPost.php">NuevoPost</a></li>
-                <li><a>buscarPost</a></li>
+                <li><a href="searchPost.php">buscarPost</a></li>
             </ul>
         </div>
     </div>

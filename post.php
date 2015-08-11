@@ -13,6 +13,9 @@
         }
     </script>
     <style>
+        h4{
+            text-align: center;
+        }
         span{
             background-color: white;
         }
@@ -25,14 +28,25 @@
 		text-align: center;
 		left:10px;		
 	}
+        /*.jumbotron{
+            position:relative;
+            left:150px;
+        }*/
+        #textoNoBorde{
+         text-align: center;
+         height: auto;
+         width: auto;
+         border-width:0;
+     }
+
     </style>
 </head>
 <body>
 <br>
 <br>
 <br>
-<table id="tabla" align="center" border="1" cellspacing="1" cellpadding="2" style="font-size: 8pt">
-    <tr>
+<table  class='table table-bordered table-hover' id="tabla" align="center" border="1" cellspacing="1" cellpadding="2" style="font-size: 8pt">
+    <tr class='warning'>
         <td class="celda"><b>Autor</b></td>
         <td class="celda"><b>Fecha</b></td>
         <td class="celda"><b>Titulo</b></td>
@@ -47,7 +61,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="newPost.php">nuevoPost</a></li>
-                    <li><a>buscarPost</a></li>
+                    <li><a href="searchPost.php">buscarPost</a></li>
                 </ul>
             </div>
         </div>
@@ -86,23 +100,25 @@ if(!$results){
 while ($row = $results->fetch_array()) {
     $texto = $row[0];
 }
-        echo "<tr><td><input type='text' size=auto id='textoNoBorde' name='Autor' value='" .$autor . "' readonly></td>";
-        echo "<td id='celda'><input type='text' id='textoNoBorde' name='Fecha' value='".$fecha."' readonly></td>";
-        echo "<td id='celda'><input type='text' id='textoNoBorde' name='Titulo' value='" .$titulo . "' readonly></td>";
-        echo "<td id='celda'><textarea  id='textoNoBorde' name='Texto' readonly>$texto</textarea></td>";
+        echo "<tr class='info'><td><input type='text' align='center' size=auto id='textoNoBorde' name='Autor' value='" .$autor . "' readonly></td>";
+        echo "<td id='celda'><input type='text' align='center' id='textoNoBorde' name='Fecha' value='".$fecha."' readonly></td>";
+        echo "<td id='celda'><input type='text' align='center' id='textoNoBorde' name='Titulo' value='" .$titulo . "' readonly></td>";
+        echo "<td id='celda'><textarea  align='center' id='textoNoBorde' name='Texto' readonly>$texto</textarea></td>";
     } else {
         echo 'algo falló\n';
         echo '<br>';
 }
+echo "</tr>";
 echo "</table>";
  $conn->close();
 // cargamos el formulario de añadir comentarios
 echo "<hr>";
 echo "
 <form action='insertarComentario.php' method='post'>
-    <input type='text' placeholder='Introduce Autor' size='100px' id='textoNoBorde' name='Autor'><br>
-    <input type='text' placeholder='Introduce titulo' size='100px' id='textoNoBorde' value=$titulo name='Titulo'><br>
-    <input type='text' placeholder='Introduce Texto' size='100px' id='textoNoBorde' name='Texto'><br>
+    <h4>Nuevo comentario</h4>
+    <input type='text' placeholder='Introduce Autor' size='100px' id='textoBorde' name='Autor'><br>
+    <input type='text' placeholder='Introduce titulo' size='100px' id='textoBorde' value='$titulo' name='Titulo'><br>
+    <input type='text' placeholder='Introduce Texto' size='100px' id='textoBorde' name='Texto'><br>
    <button class='btn btn-default' id='boton'><i class='glyphicon glyphicon-send'></i>Enviar</button>
    </form>";
 echo "<hr>";
@@ -123,15 +139,18 @@ if(!$results){
 }else{
     //echo "Los datos se seleccionaron correctamente\n";
     // echo "<br>";
-}
+    $row_cnt = $results->num_rows;
+if ($row_cnt > 0){
+    echo "<h4>Comentarios:</h4>";
+    echo "<div class='container'>";
+} else {echo "<h4>No hay comentarios almacenados:</h4>";}
 //cargamos los resultados
 while ($row = $results->fetch_array()) {
-echo "<table id='tabla' align='center' border='1' cellspacing='1' cellpadding='2' style='font-size: 8pt'>";
-echo "<tr><td class='celda'><b>Autor</b></td><td class='celda'><b>Titulo</b></td><td class='celda'><b>Texto</b></td></tr>";
-echo "<tr><td><input type='text' size=auto id='textoNoBorde' name='tlf2' value='" .$row[0] . "' readonly></td>";
-echo "<td id='celda'><input type='text' id='textoNoBorde' name='tlf2' value='".$row[1]."' readonly></td>";
-echo "<td id='celda'><textarea id='textoNoBorde' name='tlf2' readonly>'" .$row[2] . "'</textarea></td>";
-echo "</table>";
+    echo "<div class='jumbotron'><p><b>$row[1]</b><br>";
+    echo "<b>$row[2]</b></p><br></div>";
+
+}
+    echo "</div>";
 }
  $conn->close();
 ?>
