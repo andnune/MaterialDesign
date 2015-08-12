@@ -1,3 +1,15 @@
+<?php
+require 'funcionSelectTexto.php';
+require 'funcionComments.php';
+if ((($_REQUEST['Autor'] != " ")) && (($_REQUEST['Titulo'] != " ")) && (($_REQUEST['Fecha'] != " ")) && (($_REQUEST['Texto'] != " "))) {
+    $autor = $_REQUEST['Autor'];
+    $titulo = $_REQUEST['Titulo'];
+    $fecha = $_REQUEST['Fecha'];
+    $texto = $_REQUEST['Texto'];
+    $results = seleccTexto($titulo);
+}
+$resultsComments = seleccComments($titulo);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +30,7 @@
         }
         span{
             background-color: white;
+            font-size: 20px;
         }
         .celda{
             text-align: center;
@@ -28,10 +41,6 @@
 		text-align: center;
 		left:10px;		
 	}
-        /*.jumbotron{
-            position:relative;
-            left:150px;
-        }*/
         #textoNoBorde{
          text-align: center;
          height: auto;
@@ -67,92 +76,43 @@
         </div>
     </nav>
 
-<?php
-if ((($_REQUEST['Autor'] != " ")) && (($_REQUEST['Titulo'] != " ")) && (($_REQUEST['Fecha'] != " ")) && (($_REQUEST['Texto'] != " "))) {
-$autor = $_REQUEST['Autor'];
-$titulo = $_REQUEST['Titulo'];
-$fecha = $_REQUEST['Fecha'];
-$texto = $_REQUEST['Texto'];
-$server = "localhost";
-$user = "root";
-$pass="9psCXanh";
-$db = "blog";
-// Create connection para tabla blog
-$conn = new mysqli($server, $user, $pass, $db);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} else {
-    // echo "no error\n";
-    // echo "<br>";
-}
-//consultamos
-$datos="select texto from blog where (titulo='".$titulo."')";
-$results = $conn->query($datos);
-if(!$results){
-    echo "Error al seleccionar los datos\n";
-    echo "<br>";
-}else{
-    //echo "Los datos se seleccionaron correctamente\n";
-    // echo "<br>";
-}
-//cargamos los resultados
-while ($row = $results->fetch_array()) {
-    $texto = $row[0];
-}
-        echo "<tr class='info'><td><input type='text' align='center' size=auto id='textoNoBorde' name='Autor' value='" .$autor . "' readonly></td>";
-        echo "<td id='celda'><input type='text' align='center' id='textoNoBorde' name='Fecha' value='".$fecha."' readonly></td>";
-        echo "<td id='celda'><input type='text' align='center' id='textoNoBorde' name='Titulo' value='" .$titulo . "' readonly></td>";
-        echo "<td id='celda'><textarea  align='center' id='textoNoBorde' name='Texto' readonly>$texto</textarea></td>";
-    } else {
-        echo 'algo falló\n';
-        echo '<br>';
-}
-echo "</tr>";
-echo "</table>";
- $conn->close();
-// cargamos el formulario de añadir comentarios
-echo "<hr>";
-echo "
+    <? if(empty($results)): ?>
+    <h4>Error al seleccionar los datos</h4>
+    <br>
+    <? else: ?>
+<!--cargamos los resultados-->
+   <? foreach ($results as $post): ?>
+        <tr class='info'><td><input type='text' align='center' size=auto id='textoNoBorde' name='Autor' value="<? echo $post['autor'] ?>" readonly></td>
+        <td id='celda'><input type='text' align='center' id='textoNoBorde' name='Fecha' value="<? echo $post['fecha'] ?>" readonly></td>
+        <td id='celda'><input type='text' align='center' id='textoNoBorde' name='Titulo' value="<? echo $post['titulo'] ?>" readonly></td>
+        <td id='celda'><textarea  align='center' id='textoNoBorde' name='Texto' readonly>"<? echo $post['texto'] ?>"</textarea></td>
+        </tr>
+        </table>
+    <? endforeach; ?>
+    <? endif; ?>
+<!-- cargamos el formulario de añadir comentarios-->
+<hr>
+
 <form action='insertarComentario.php' method='post'>
     <h4>Nuevo comentario</h4>
     <input type='text' placeholder='Introduce Autor' size='100px' id='textoBorde' name='Autor'><br>
     <input type='text' placeholder='Introduce titulo' size='100px' id='textoBorde' value='$titulo' name='Titulo'><br>
     <input type='text' placeholder='Introduce Texto' size='100px' id='textoBorde' name='Texto'><br>
    <button class='btn btn-default' id='boton'><i class='glyphicon glyphicon-send'></i>Enviar</button>
-   </form>";
-echo "<hr>";
-// Create connection para tabla comentarios y les mostramos
-$conn = new mysqli($server, $user, $pass, $db);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} else {
-    // echo "no error\n";
-    // echo "<br>";
-}
-$datos="select * from comentarios where (titulo='".$titulo."')";
-$results = $conn->query($datos);
-if(!$results){
-    echo "Error al seleccionar los datos\n";
-    echo "<br>";
-}else{
-    //echo "Los datos se seleccionaron correctamente\n";
-    // echo "<br>";
-    $row_cnt = $results->num_rows;
-if ($row_cnt > 0){
-    echo "<h4>Comentarios:</h4>";
-    echo "<div class='container'>";
-} else {echo "<h4>No hay comentarios almacenados:</h4>";}
-//cargamos los resultados
-while ($row = $results->fetch_array()) {
-    echo "<div class='jumbotron'><p><b>$row[1]</b><br>";
-    echo "<b>$row[2]</b></p><br></div>";
-
-}
-    echo "</div>";
-}
- $conn->close();
-?>
+   </form>
+<hr>
+<h4>Comentarios:</h4>
+<hr>
+<? if (empty($resultsComments)) : ?>
+    <h2>No hay comentarios almacenados</h2>
+    <br>
+<? else: ?>
+    <div class='container'>
+        <? foreach ($resultsComments as $post): ?>
+    <div class='jumbotron'><p><b><? echo $post['autor'] ?></b><br>
+    <b><? echo $post['texto'] ?></b></p><br></div>
+        <? endforeach; ?>
+    </div>
+<? endif; ?>
 </body>
 </html>

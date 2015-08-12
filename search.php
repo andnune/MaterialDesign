@@ -1,3 +1,11 @@
+<?php
+require 'funcionSearch.php';
+if ((($_REQUEST['search'] != ""))) {
+    $results = searchBlog($_REQUEST['search']);
+} else {
+    echo "<h2>No ha insertado ningun contenido para la busqueda</h2>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +18,11 @@
     <style>
         span {
             background-color: white;
+            font-size: 20px;
         }
-
+         h2{
+             color:red;
+         }
         .celda {
             text-align: center;
             height: auto;
@@ -22,11 +33,12 @@
             text-align: center;
             left: 10px;
         }
-        #textoNoBorde{
+
+        #textoNoBorde {
             text-align: center;
             height: auto;
             width: auto;
-            border-width:0;
+            border-width: 0;
         }
     </style>
 </head>
@@ -49,59 +61,25 @@
     </div>
 </nav>
 
-<?php
-if ((($_REQUEST['search'] != ""))) {
-
-    $titulo = $_REQUEST['search'];
-    $server = "localhost";
-    $user = "root";
-    $pass = "9psCXanh";
-    $db = "blog";
-// Create connection para tabla blog
-    $conn = new mysqli($server, $user, $pass, $db);
-// Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } else {
-        // echo "no error\n";
-        // echo "<br>";
-    }
-//consultamos
-    $datos = "select * from blog where texto like '%" . $titulo . "%' OR titulo like '%" . $titulo . "%'";
-    $results = $conn->query($datos);
-    if (!$results) {
-        echo "No existe el blog deseado\n";
-        echo "<br>";
-    } else {
-        $row_cnt = $results->num_rows;
-        if ($row_cnt > 0){
-        //echo "Los datos se seleccionaron correctamente\n";
-        // echo "<br>";
-
-//cargamos los resultados
-        echo "<table class='table table-bordered table-hover' id='tabla' align='center' border='1' cellspacing='1' cellpadding='2' style='font-size: 8pt'>
-    <tr class='warning'>
-        <td class='celda'><b>Autor</b></td>
-        <td class='celda'><b>Fecha</b></td>
-        <td class='celda'><b>Titulo</b></td>
-        <td class='celda'><b>Texto</b></td>
-
-    </tr>";
-        while ($row = $results->fetch_array()) {
-            echo "<tr class='info'><td><input type='text' size=auto id='textoNoBorde' name='Autor' value='" . $row[0] . "' readonly></td>";
-            echo "<td id='celda'><input type='text' id='textoNoBorde' name='Fecha' value='" . $row[1] . "' readonly></td>";
-            echo "<td id='celda'><input type='text' id='textoNoBorde' name='Titulo' value='" . $row[2] . "' readonly></td>";
-            echo "<td id='celda'><textarea  id='textoNoBorde' name='Texto' readonly>$row[3]</textarea></td>";
-        }
-        echo "</tr>";
-        echo "</table>";
-        $conn->close();
-    } else {echo "<h1>No existe el blog deseado</h1>";}
-    }
-    // cargamos el formulario de añadir comentarios
-} else {
-    echo "<h1>No ha insertado ningun contenido para la busqueda</h1>";
-}
-?>
+<? if (empty($results)) : ?>
+        <h2>No existe el blog deseado</h2>
+        <br>
+      <? else: ?>
+            <table class='table table-bordered table-hover' id='tabla' align='center' border='1' cellspacing='1' cellpadding='2' style='font-size: 8pt'>
+                <tr class='warning'>
+                    <td class='celda'><b>Autor</b></td>
+                    <td class='celda'><b>Fecha</b></td>
+                    <td class='celda'><b>Titulo</b></td>
+                    <td class='celda'><b>Texto</b></td>
+                </tr>
+           <? foreach ($results as $post): ?>
+                <tr class='info'><td class='celda'><input type='text' size=auto id='textoNoBorde' name='Autor' value="<? echo $post['autor'] ?>" readonly></td>
+                    <td class='celda'><input type='text' id='textoNoBorde' name='Fecha' value="<? echo $post['fecha'] ?>" readonly></td>
+                   <td class='celda'><input type='text' id='textoNoBorde' name='Titulo' value="<? echo $post['titulo'] ?>" readonly></td>
+                    <td class='celda'><textarea  id='textoNoBorde' name='Texto' readonly><? echo $post['texto'] ?></textarea></td>
+        <? endforeach; ?>
+      <? endif; ?>
+            </tr>
+            </table>
 </body>
 </html>

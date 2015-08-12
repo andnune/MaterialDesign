@@ -10,6 +10,7 @@
     <style>
         span{
             background-color: white;
+            font-size: 20px;
         }
         form{
 		position:relative;
@@ -28,7 +29,6 @@
             <span class="brand">blog aplicacion</span>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index.php">Inicio</a></li>
-                <li><a href="newPost.php">NuevoPost</a></li>
                 <li><a href="searchPost.php">buscarPost</a></li>
             </ul>
         </div>
