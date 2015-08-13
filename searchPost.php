@@ -7,17 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style>
-        span{
-            background-color: white;
-            font-size: 20px;
-        }
-        .celda{
-            text-align: center;
-            height: auto;
-            width: auto;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -37,20 +27,22 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h2> Introduzca los terminos a buscar </h2>
+            <h2 id="normal"> Introduzca los terminos a buscar </h2>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-4 col-md-offset-3">
             <form action="search.php" method="post" class="search-form">
-                <div class="form-group has-feedback">
-                    <label for="search" class="sr-only">Search</label>
-                    <input type="text" class="form-control" name="search" id="search" placeholder="Introduzca su búsqueda y presione tecla 'Enter'">
-                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Introduzca su búsqueda" id="search" name="search">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
                 </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 </div>
 </body>
 </html>

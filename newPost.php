@@ -7,20 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style>
-        span{
-            background-color: white;
-            font-size: 20px;
-        }
-        form{
-		position:relative;
-		left: 10%;
-	}
-	button{
-		position:relative;
-		left:25%;
-	}
-    </style>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -42,11 +29,8 @@
     <input type='text' placeholder="Fecha" size="100px" id='textoNoBorde' name='Fecha'><br>
     <input type='text' placeholder="Introduce titulo" size="100px" id='textoNoBorde' name='Titulo'><br>
     <input type='text' placeholder="Texto" size="100px" id='textoNoBorde' name='Texto'><br>
-   <button class="btn btn-default" id='boton'><i class="glyphicon glyphicon-eye-open"></i>Enviar
+   <button class="btn btn-default" id='botonNewPost'><i class="glyphicon glyphicon-eye-open"></i>Enviar
    </form>
 
 </body>
 </html>
-<?php
-
-?>

@@ -12,26 +12,7 @@ $results = seleccTodoBlog();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style>
-        body{
-            padding-top:50px;
-        }
-        span{
-            background-color: white;
-            font-size: 20px;
-        }
-        .celda{
-            text-align: center;
-            height: auto;
-            width: auto;
-        }
-        #textoNoBorde{
-            text-align: center;
-            height: auto;
-            width: auto;
-            border-width:0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -45,25 +26,18 @@ $results = seleccTodoBlog();
         </div>
     </div>
 </nav>
-<table  class='table table-bordered table-hover' id="tabla" align="center" border="1" cellspacing="1" cellpadding="2" style="font-size: 8pt">
-    <tr class='warning'>
-        <th class="celda"><b>Autor</b></th>
-        <th class="celda"><b>Fecha</b></th>
-        <th class="celda"><b>Titulo</b></th>
-        <th class="celda"><b>Texto</b></th>
-
-    </tr>
+<div class='container-fluid'>
+<!--<div class="col-md-4 ">-->
     <? foreach ($results as $post): ?>
-        <form action='post.php' method='post'>
-    <tr class='info'><td class='celda'><input type='text' size=auto id='textoNoBorde'  name='Autor' value="<? echo $post['autor'] ?>" readonly></td>
-        <td class='celda'><input type='text' id='textoNoBorde' name='Fecha' value="<? echo $post['fecha'] ?>" readonly></td>
-        <td class='celda'><input type='text' id='textoNoBorde' name='Titulo' value="<? echo $post['titulo'] ?>"  readonly></td>
-       <? $textoCorto = $post['texto'];
+        <div class="panel col-sm-4" onclick='window.document.location="post.php?whatever=<? echo $post['titulo'] ?>"'>
+            <div class="panel-heading"><b><a href="post.php?whatever=<? echo $post['titulo'] ?>">Tittle: <h7><? echo $post['titulo'] ?></h7></a></b></div>
+            <div class="panel-body"><b>Author: <? echo $post['autor'] ?></b></div>
+            <div class="panel-body"><b>Date: <? echo $post['fecha'] ?></b></div>
+            <? $textoCorto = $post['texto'];
         $textoFinal = substr($textoCorto, 0, 20);?>
-       <td class='celda'><input type='text' id='textoNoBorde' name='Texto' value="<? echo $textoFinal ?>" readonly></td>
-        <td class='celda'><button class='btn btn-default' id='boton' name='Acceder' readonly><i class='glyphicon glyphicon-eye-open'></i>Acceder</td>
-        </tr>
-            </form>
+            <div class="panel-body"><b>Body: <? echo /*$post['texto']*/$textoFinal ?></b></div>
+        </div>
     <? endforeach; ?>
+    </div>
 </body>
 </html>

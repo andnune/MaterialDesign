@@ -1,0 +1,55 @@
+span{
+    background-color: white;
+    font-size: 20px;
+}
+body{
+    padding-top:50px;
+}
+.celda{
+    text-align: center;
+    height: auto;
+    width: auto;
+}
+a.list-group-item {
+    background-color: gainsboro;
+}
+h2{
+    color: red;
+}
+h2#normal{
+    color: black;
+}
+form{
+    position:relative;
+    text-align: center;
+}
+.celda {
+    text-align: center;
+    height: auto;
+    width: auto;
+}
+#Comentarios{
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+}
+h4 {
+    font-weight: bold;
+}
+.formInsertComment{
+    position:relative;
+    text-align: center;
+}
+button{
+    position: relative;
+    text-aligned:center;
+}
+div.panel-heading{
+    background-color: blanchedalmond;
+    text-decoration: underline;
+    color: black;
+}
+div.panel-body{
+    background-color: lightskyblue;
+    color: black;
+}
