@@ -214,7 +214,7 @@ function searchBlog($search){
  * User: andrescloudman
  */
 function insertComment($autor,$titulo,$texto){
-    $Autor = $autor; $Titulo = $titulo; $Texto=$texto;
+    $Autor = $autor; $Titulo = $titulo; $Texto=$texto; $fecha= date("Y-n-d H:i:s");
     $server = "localhost";
     $user = "root";
     $pass = "9psCXanh";
@@ -226,10 +226,10 @@ function insertComment($autor,$titulo,$texto){
         //iniciamos el stmt
         $sentencia=  $conn->stmt_init();
         //preparamos el statement (stmt)
-        if (!$sentencia->prepare("INSERT INTO comentarios (autor, blog_id,texto ) VALUES(?,?,?)")){
+        if (!$sentencia->prepare("INSERT INTO comentarios (autor, blog_id,texto,fecha ) VALUES(?,?,?,?)")){
             echo "Falló la preparación: (" . $conn->errno . ") " . $conn->error;
         } else {
-            mysqli_stmt_bind_param($sentencia,"sis",$Autor, $Titulo, $Texto);
+            mysqli_stmt_bind_param($sentencia,"siss",$Autor, $Titulo, $Texto,$fecha);
             if (!($sentencia->execute())) {
                 return "0";
             } else {
