@@ -13,14 +13,14 @@ if ((($_GET['whatever'] != ""))){
         <br>
     <? else: ?>
     <!--cargamos los resultados-->
-    <? foreach ($results as $post): ?>
+    <? //foreach ($results as $post): ?>
             <div class="panel ">
-                <div class="panel-heading"><b>Tittle: <h7><? echo $post['titulo'] ?></h7></b></div>
-                <div class="panel-body"><b>Author: <? echo $post['autor'] ?></b></div>
-                <div class="panel-body"><b>Body: <? echo $post['texto'] ?></b></div>
-                <div class="panel-body"><b>Date: <? echo $post['fecha'] ?></b></div>
+                <div class="panel-heading"><b>Tittle: <h7><? echo $results['titulo'] ?></h7></b></div>
+                <div class="panel-body"><b>Author: <? echo $results['autor'] ?></b></div>
+                <div class="panel-body"><b>Body: <? echo $results['texto'] ?></b></div>
+                <div class="panel-body"><b>Date: <? echo $results['fecha'] ?></b></div>
             </div>
-<? endforeach; ?>
+<? //endforeach; ?>
 <? endif; ?>
 <!-- cargamos el formulario de añadir comentarios-->
 <hr>
