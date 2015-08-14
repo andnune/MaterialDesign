@@ -1,5 +1,6 @@
 <?php
 require 'funcionIndex.php';
+include 'header.html';
 if ((($_GET['whatever'] != ""))){
     $titulo = $_GET['whatever'];
     $results = seleccTexto($titulo);
@@ -7,34 +8,6 @@ if ((($_GET['whatever'] != ""))){
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog php</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="estilos.css">
-</head>
-<body>
-<br>
-<br>
-<br>
-<div class="container">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <span class="brand">blog aplicacion</span>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="newPost.php">nuevoPost</a></li>
-                    <li><a href="searchPost.php">buscarPost</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <? if (empty($results[0])): ?>
         <h2>Error al seleccionar los datos</h2>
         <br>
@@ -76,6 +49,4 @@ if ((($_GET['whatever'] != ""))){
         </div>
         <? endforeach; ?>
 <? endif; ?>
-    </div>
-</body>
-</html>
+  <? include 'footer.html'; ?>
