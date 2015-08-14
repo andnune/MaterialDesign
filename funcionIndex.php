@@ -229,7 +229,6 @@ function insertComment($autor,$titulo,$texto){
         if (!$sentencia->prepare("INSERT INTO comentarios (autor, blog_id,texto,fecha ) VALUES(?,?,?,?)")){
             echo "Falló la preparación: (" . $conn->errno . ") " . $conn->error;
         } else {
-            echo $fecha;
             mysqli_stmt_bind_param($sentencia,"siss",$Autor, $Titulo, $Texto,$fecha);
             if (!($sentencia->execute())) {
                 return "0";
