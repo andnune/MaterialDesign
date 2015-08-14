@@ -69,7 +69,7 @@ function seleccComments($tittle)
             } else {
                 /* vincular las variables de resultados */
                 $arraydePosts = array();
-                $sentencia->bind_result($id,$Titulo,$Autor,$Texto,$blog_id);
+                $sentencia->bind_result($id,$Titulo,$Autor,$Texto,$blog_id,$fecha);
                 /* obtener los valores */
                 while ($sentencia->fetch()) {
                     array_push($arraydePosts,array(
@@ -77,6 +77,7 @@ function seleccComments($tittle)
                         "autor"=>$Autor,
                         "texto"=>$Texto,
                         "blog_id" => $id,
+                        "fecha" => $fecha,
                     ));
                 }
                 $conn->close();
