@@ -77,7 +77,7 @@ function seleccComments($tittle)
                         "autor"=>$Autor,
                         "texto"=>$Texto,
                         "blog_id" => $id,
-                        "fecha"=>$fecha,
+                        "fecha" => $fecha,
                     ));
                 }
                 $conn->close();
@@ -85,7 +85,6 @@ function seleccComments($tittle)
             }
         }
     }
-
 };
 /**
  * funcion para recuperar el texto de un blog
@@ -126,14 +125,12 @@ function seleccTexto($tittle)
                         "id" => $id,
                     ));*/
                     $arraydePosts= array("autor"=>$Autor,"fecha"=>$Fecha,"titulo"=>$Titulo,"texto"=>$Texto,"id" => $id,);
-
                 }
                 $conn->close();
                 return $arraydePosts;
             }
         }
     }
-
 };
 /**
  * funcion para insertar
@@ -159,7 +156,6 @@ function insertBlog($Autor,$Titulo,$Fecha,$Texto){
             echo "Falló la preparación: (" . $conn->errno . ") " . $conn->error;
         } else {
             mysqli_stmt_bind_param($sentencia,"ssss",$Autor, $Titulo, $Fecha, $Texto);
-
             if (!($sentencia->execute())) {
                 $conn->close();
                 return "0";

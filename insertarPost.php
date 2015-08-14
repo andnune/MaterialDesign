@@ -15,9 +15,9 @@ if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST
 ?>
 <? if ($seguir == 1) : ?>
     <? if ($consulta == 0) : ?>
-    <div class='container'><h2>Error al insertar los datos</h2></div>
+        <div class='container'><h2>Error al insertar los datos</h2></div>
     <? else: ?>
-    <? header('Location: http://localhost/primeroPhpStorm/index.php'); ?>
+        <? header('Location: http://localhost/primeroPhpStorm/index.php'); ?>
     <? endif; ?>
 <? endif; ?>
 <? include ("footer.html"); ?>
