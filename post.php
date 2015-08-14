@@ -30,7 +30,7 @@ if ((($_GET['whatever'] != ""))){
                name='Titulo' readonly><br>
         <input type='text' placeholder='Introduce Texto' size='100px' id='textoBorde' name='Texto'><br>
         <input type='hidden' name='id_blog' value="<? echo $results['id'] ?>"><br>
-        <button class='btn btn-default' id='boton'><i class='glyphicon glyphicon-send'></i>Enviar</button>
+        <button class='btn btn-success' id='boton'><i class='glyphicon glyphicon-send'></i>Enviar</button>
     </form>
     <hr>
     <h4 id="Comentarios">Comentarios:</h4>
