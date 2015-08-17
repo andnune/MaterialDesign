@@ -3,8 +3,6 @@ require 'funcionIndex.php';
 include 'header.html';
 //cargamos los resultados
 $results = seleccTodoBlog();
-$ButtonArray = array();
-$var = "<button class='btn btn-warning'>";
 ?>
 
     <div class="row">
