@@ -1,9 +1,11 @@
-span{
-    background-color: white;
-    font-size: 20px;
+.imagenPost{
+max-height: 250px;
+}
+.colorear{
+    background-color: darkorange;
 }
 body{
-    padding-top:50px;
+    padding-top:75px;
 }
 .celda{
     text-align: center;
@@ -52,7 +54,4 @@ div.panel-heading{
 div.panel-body{
     background-color: lightskyblue;
     color: black;
-}
-num{
-    background-color: lightgrey;
 }

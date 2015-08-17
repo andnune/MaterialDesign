@@ -5,16 +5,40 @@ include 'header.html';
 $results = seleccTodoBlog();
 ?>
 
-    <!--<div class="col-md-4 ">-->
-<? foreach ($results as $post): ?>
-    <div class="panel col-sm-6" onclick='window.document.location="post.php?whatever=<? echo $post['id'] ?>"'>
-        <div class="panel-heading"><b><a href="post.php?whatever=<? echo $post['id'] ?>">Tittle: <h7><? echo $post['titulo'] ?></h7></a></b></div>
-        <div class="panel-body"><b>Author: <? echo $post['autor'] ?></b></div>
-        <div class="panel-body"><b>Date: <? echo $post['fecha'] ?></b></div>
-        <? $textoCorto = $post['texto'];
-        $textoFinal = substr($textoCorto, 0, 20);?>
-        <div class="panel-body"><b>Body: <? echo $textoFinal ?></b></div>
+    <div class="row">
+        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
+        <? foreach ($results as $post): ?>
+    <div class="row" >
+        <div class="col-lg-4">
+            <img src="<? echo $post['img'] ?>" class="img-responsive"/>
+            </div>
+        <div class="col-lg-8">
+            <small class="text-muted"><? echo $post['fecha'] ?> por <? echo $post['autor'] ?></small>
+            <h2><a href="post.php?whatever=<?  echo $post['id'] ?>"><? echo $post['titulo'] ?></a></h2>
+            <? $textoCorto = $post['texto'];
+            $textoFinal = substr($textoCorto, 0, 120); ?>
+            <p><? echo $textoFinal ?></p>
+        </div>
     </div>
-<? endforeach; ?>
-
-<? include 'footer.html';?>
+            <hr>
+        <? endforeach; ?>
+       <!-- </div>
+        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
+            <? //foreach ($results as $post): ?>
+                <div class="row" >
+                    <div class="col-lg-4">
+                        <img src="<? //echo $post['img'] ?>" class="img-responsive"/>
+                    </div>
+                    <div class="col-lg-8">
+                        <small class="text-muted"><? //echo $post['fecha'] ?> por <? //echo $post['autor'] ?></small>
+                        <h2><a href="post.php?whatever=<?  //echo $post['id'] ?>"><? //echo $post['titulo'] ?></a></h2>
+                        <? //$textoCorto = $post['texto'];
+                       // $textoFinal = substr($textoCorto, 0, 120); ?>
+                        <p><? //echo $textoFinal ?></p>
+                    </div>
+                </div>
+                <hr>
+            <? //endforeach; ?>
+       --> </div>
+    </div>
+<? include 'footer.html'; ?>

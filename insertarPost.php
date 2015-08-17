@@ -6,8 +6,10 @@ if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST
     $titulo = $_REQUEST['Titulo'];
     $fecha = $_REQUEST['Fecha'];
     $texto = $_REQUEST['Texto'];
+    $img = $_REQUEST['Imagen'];
     require 'funcionIndex.php';
-    $consulta=insertBlog($autor,$titulo,$fecha,$texto);
+    $consulta=insertBlog($autor,$titulo,$fecha,$texto,$img);
+    var_dump($consulta);
 } else {
     $seguir = 0;
     echo "<div class='container'><h2>Fallo en los datos a insertar</h2></div>";

@@ -23,7 +23,7 @@ function seleccTodoBlog()
             } else {
                 /* vincular las variables de resultados */
                 $arraydePosts = array();
-                $sentencia->bind_result($Autor, $Fecha,$Titulo,$Texto,$id);
+                $sentencia->bind_result($Autor, $Fecha,$Titulo,$Texto,$id,$img);
                 /* obtener los valores */
                 while ($sentencia->fetch()) {
                     array_push($arraydePosts,array(
@@ -32,6 +32,7 @@ function seleccTodoBlog()
                         "titulo"=>$Titulo,
                         "texto"=>$Texto,
                         "id" => $id,
+                        "img"=> $img,
                     ));
                 }
                 $conn->close();
@@ -114,7 +115,7 @@ function seleccTexto($tittle)
             } else {
                 /* vincular las variables de resultados */
                 $arraydePosts = array();
-                $sentencia->bind_result($Autor, $Fecha,$Titulo,$Texto,$id);
+                $sentencia->bind_result($Autor, $Fecha,$Titulo,$Texto,$id,$img);
                 /* obtener los valores */
                 while ($sentencia->fetch()) {
                     /*array_push($arraydePosts,array(
@@ -124,7 +125,7 @@ function seleccTexto($tittle)
                         "texto"=>$Texto,
                         "id" => $id,
                     ));*/
-                    $arraydePosts= array("autor"=>$Autor,"fecha"=>$Fecha,"titulo"=>$Titulo,"texto"=>$Texto,"id" => $id,);
+                    $arraydePosts= array("autor"=>$Autor,"fecha"=>$Fecha,"titulo"=>$Titulo,"texto"=>$Texto,"id" => $id,"img"=>$img);
                 }
                 $conn->close();
                 return $arraydePosts;
@@ -137,7 +138,7 @@ function seleccTexto($tittle)
  * un nuevo blog
  * User: andrescloudman
  */
-function insertBlog($Autor,$Titulo,$Fecha,$Texto){
+function insertBlog($Autor,$Titulo,$Fecha,$Texto,$img){
     $server = "localhost";
     $user = "root";
     $pass = "9psCXanh";
@@ -152,10 +153,10 @@ function insertBlog($Autor,$Titulo,$Fecha,$Texto){
         //iniciamos el stmt
         $sentencia=  $conn->stmt_init();
         //preparamos la sentencia
-        if (!$sentencia->prepare("INSERT INTO blog (autor, titulo, fecha, texto) VALUES (?, ?, ?, ?)")){
+        if (!$sentencia->prepare("INSERT INTO blog (autor, titulo, fecha, texto,imageLink) VALUES (?, ?, ?, ?,?)")){
             echo "Falló la preparación: (" . $conn->errno . ") " . $conn->error;
         } else {
-            mysqli_stmt_bind_param($sentencia,"ssss",$Autor, $Titulo, $Fecha, $Texto);
+            mysqli_stmt_bind_param($sentencia,"sssss",$Autor, $Titulo, $Fecha, $Texto,$img);
             if (!($sentencia->execute())) {
                 $conn->close();
                 return "0";
@@ -191,7 +192,7 @@ function searchBlog($search){
             } else {
                 /* vincular las variables de resultados */
                 $arraydePosts = array();
-                $sentencia->bind_result($Autor, $Fecha,$Titulo,$Texto, $id);
+                $sentencia->bind_result($Autor, $Fecha,$Titulo,$Texto, $id,$img);
                 /* obtener los valores */
                 while ($sentencia->fetch()) {
                     array_push($arraydePosts,array(
