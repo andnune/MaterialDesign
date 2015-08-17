@@ -1,6 +1,6 @@
 <?php
 /**
- * funcion para index
+ * funcion para index/ ahora tendra que ir hacia class modelo
  * para recuperar todos los blogs
  * User: andrescloudman
  */
