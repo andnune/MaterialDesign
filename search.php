@@ -1,6 +1,6 @@
 <?php
 require 'funcionIndex.php';
-include ("header.html");
+include("header.html");
 if ((($_REQUEST['search'] != "")) && $_REQUEST['search'] != " ") {
     $results = searchBlog($_REQUEST['search']);
 } else {
@@ -14,18 +14,18 @@ if ((($_REQUEST['search'] != "")) && $_REQUEST['search'] != " ") {
         <h2>No existe el blog deseado</h2>
         <br>
     <? else: ?>
-        <? $num =0; ?>
-        <? foreach ($results as $post): ?>
-            <? $num++; ?> <div class="panel col-sm-4" onclick='window.document.location="post.php?whatever=<? echo $post['blog_id'] ?>"'>
-                <num><? echo $num; ?></num>
-                <div class="panel-heading"><b><a href="post.php?whatever=<? echo $post['titulo'] ?>">Tittle:
-                            <h7><? echo $post['titulo'] ?></h7>
-                        </a></b></div>
-                <div class="panel-body"><b>Author: <? echo $post['autor'] ?></b></div>
-                <div class="panel-body"><b>Body: <? echo $post['texto'] ?></b></div>
-                <div class="panel-body"><b>Date: <? echo $post['fecha'] ?></b></div>
+        <div class="row">
+            <div class="col-lg-8">
+                <? foreach ($results as $post): ?>
+                    <h4><a href="post.php?whatever=<? echo $post['blog_id'] ?>"><? echo $post['titulo'] ?></a></h4>
+                    <small class="text-muted"><? echo $post['fecha'] ?> por <? echo $post['autor'] ?></small>
+                    <? $textoCorto = $post['texto'];
+                    $textoFinal = substr($textoCorto, 0, 120); ?>
+                    <p><? echo $textoFinal ?></p>
+                    <hr>
+                <? endforeach; ?>
             </div>
-        <? endforeach; ?>
+        </div>
     <? endif; ?>
 <? endif; ?>
-<? include ("footer.html"); ?>
+<? include("footer.html"); ?>
