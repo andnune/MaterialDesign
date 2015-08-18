@@ -1,10 +1,15 @@
 <?php
 require 'funcionIndex.php';
 include 'header.html';
+require_once  'model/Model.php';
 if ((($_GET['whatever'] != ""))) {
     $titulo = $_GET['whatever'];
-    $results = seleccTexto($titulo);
-    $resultsComments = seleccComments($titulo);
+    $blog=new Post();
+    $results=$blog->seleccTexto($titulo);
+    $resultsComments=$blog->seleccComments($titulo);
+    //$results = seleccTexto($titulo);
+    //$resultsComments = seleccComments($titulo);
+    //var_dump($results['autor']);
 }
 ?>
 <? if (empty($results)): ?>
@@ -14,10 +19,10 @@ if ((($_GET['whatever'] != ""))) {
     <!--cargamos los resultados-->
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <img  class="img-responsive imagenPost" src="<? echo $results['img'] ?>"/>
-            <small> <? echo $results['fecha'] ?> por: <? echo $results['autor'] ?></small>
-            <h3><? echo $results['titulo'] ?></h3>
-            <? echo $results['texto'] ?>
+            <img  class="img-responsive imagenPost" src="<? echo /*$results->Img*/$blog->Img ?>"/>
+            <small> <? echo /*$results['fecha']*/$blog->Fecha ?> por: <? echo /*$results['autor']*/$blog->Autor ?></small>
+            <h3><? echo /*$results['titulo']*/$blog->Titulo ?></h3>
+            <? echo /*$results['texto']*/$blog->Texto ?>
 
             <!-- cargamos el formulario de añadir comentarios-->
             <hr>
@@ -41,7 +46,7 @@ if ((($_GET['whatever'] != ""))) {
                         <button type="submit" class="btn btn-success"><i class='glyphicon glyphicon-send'></i> Enviar</button>
                     </div>
                 </div>
-                <input type='hidden' name='id_blog' value="<? echo $results['id'] ?>">
+                <input type='hidden' name='id_blog' value="<? echo /*$results['id']*/$blog->Id ?>">
             </form>
             <hr>
 

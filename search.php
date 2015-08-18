@@ -1,8 +1,10 @@
 <?php
 require 'funcionIndex.php';
 include("header.html");
-if ((($_REQUEST['search'] != "")) && $_REQUEST['search'] != " ") {
-    $results = searchBlog($_REQUEST['search']);
+require_once  'model/Model.php';
+if ((($_REQUEST['search'] != ""))) {
+    $blog=new Post();
+    $results =$blog-> searchBlog($_REQUEST['search']);
 } else {
     $results = "blanco";
     echo "<div class='container'><h2>No ha insertado ningun contenido para la busqueda</h2></div>";

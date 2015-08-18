@@ -1,5 +1,6 @@
 <?php
 include ("header.html");
+require_once  'model/Model.php';
 if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST['Fecha'] != "")) && (($_REQUEST['Texto'] != ""))) {
     $seguir = 1;
     $autor = $_REQUEST['Autor'];
@@ -8,8 +9,8 @@ if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST
     $texto = $_REQUEST['Texto'];
     $img = $_REQUEST['Imagen'];
     require 'funcionIndex.php';
-    $consulta=insertBlog($autor,$titulo,$fecha,$texto,$img);
-    var_dump($consulta);
+    $blog=new Post();
+    $consulta=$blog->insertBlog($autor,$titulo,$fecha,$texto,$img);
 } else {
     $seguir = 0;
     echo "<div class='container'><h2>Fallo en los datos a insertar</h2></div>";

@@ -1,12 +1,14 @@
 <?php
 require ('funcionIndex.php');
 include ("header.html");
+require_once  'model/Model.php';
 if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Texto'] != ""))  && (($_REQUEST['id_blog'] != ""))) {
     $seguir = 1;
     $autor = $_REQUEST['Autor'];
     $texto = $_REQUEST['Texto'];
     $id = $_REQUEST['id_blog'];
-    $consulta = insertComment($autor,$id,$texto);
+    $blog=new Post();
+    $consulta = $blog->insertComment($autor,$id,$texto);
 } else {
     $seguir = 0;
     echo "<div class='container'><h2> Los datos no pueden  quedar sin rellenar </h2></div>";
