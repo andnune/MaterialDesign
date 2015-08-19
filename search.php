@@ -1,7 +1,7 @@
 <?php
 require 'funcionIndex.php';
 include("header.html");
-require_once  'model/Model.php';
+require_once 'model/ModelPost.php';
 if ((($_REQUEST['search'] != ""))) {
     $blog=new Post();
     $results =$blog-> searchBlog($_REQUEST['search']);

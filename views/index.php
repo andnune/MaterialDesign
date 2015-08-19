@@ -2,7 +2,7 @@
 <?
 require_once 'funcionIndex.php';
 include 'header.html';
-require_once  'model/Model.php';
+require_once  'model/ModelPost.php';
 require_once ("controller/BlogController.php");
 
 $arrayIzq = array();

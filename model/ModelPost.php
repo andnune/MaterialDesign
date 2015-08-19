@@ -1,9 +1,8 @@
 <?php
-
+require_once "collection/Collection.php";
 class Post
 {
     private $conn;
-    private $arraydePosts;
     private $id;
     private $autor;
     private $texto;
@@ -18,103 +17,65 @@ class Post
         $this->modelo = array();
     }
 
-    /* public function __construct2($autor,$fecha,$titulo,$text,$id,$imageLink){
-         //$this->conn=Model::conexion();
-         $this->conn=conexion();
-         $this->arraydePosts=array($autor,$fecha,$titulo,$text,$id,$imageLink);
-     }*/
+public function rellenar($id0,$autor0,$texto0,$fecha0,$img0,$titulo0){
+    $this->id=$id0;
+    $this->autor=$autor0;
+    $this->texto=$texto0;
+    $this->fecha=$fecha0;
+    $this->img=$img0;
+    $this->titulo=$titulo0;
+}
+public function getAlgo($algo){
+    echo "eee: ".($this->autor)."eee\n";
+    return ($this->$algo);
+}
+public function modeloAlert($algo){
+    echo "alert: ($algo)";
+
+}
     public function get_blogs()
     {
-        $modelo = array();
+        $collection = array();
         // $this->conn=Model::conexion();
         $this->conn = conexion();
         $sentencia = $this->conn->stmt_init();
-        if (!$sentencia->prepare("select * from blog")) {
+       // $sentencia2 = $this->conn->stmt_init();
+        if (!$sentencia->prepare("select * from blog ORDER BY (titulo)")/* || (!$sentencia2->prepare("select * from blog ORDER BY (titulo)"))*/) {
             echo "Falló la preparación: (" . $this->conn->errno . ") " . $this->conn->error;
         } else {
-            if (!($sentencia->execute())) {
+            if (!($sentencia->execute()) /*|| (!($sentencia2->execute()))*/) {
                 return "0";
             } else {
                 /* vincular las variables de resultados */
-                //$sentencia->bind_result($Autor, $Fecha, $Titulo, $Texto, $Id, $Img);
-                $sentencia->bind_result($this->Autor, $this->Fecha, $this->Titulo, $this->Texto, $this->Id, $this->Img);
+                $sentencia->bind_result($Autor, $Fecha, $Titulo, $Texto, $Id, $imageLink);
+               // $sentencia2->bind_result($Autor, $Fecha, $Titulo, $Texto, $Id, $imageLink);
+                //$sentencia->bind_result($this->Autor, $this->Fecha, $this->Titulo, $this->Texto, $this->Id, $this->Img);
                 /* obtener los valores */
-                /*while ($sentencia->fetch()) {
-                    array_push($modelo, array(
-                        "autor" => Autor,
-                        "fecha" => Fecha,
-                        "titulo" => Titulo,
-                        "texto" => Texto,
-                        "id" => Id,
-                        "img" => Img,
+                $c = new Collection();
+                while ($sentencia->fetch()) {
+                    array_push($collection, array(
+                        "autor" => $Autor,
+                        "fecha" => $Fecha,
+                        "titulo" => $Titulo,
+                        "texto" => $Texto,
+                        "id" => $Id,
+                        "img" => $imageLink,
                     ));
-                }*/
-                while ($row = $sentencia->fetch()) {
-                    $this->Post[]=$row;
-                    var_dump($this->Post[Fecha]);
+                    $c->addItem(array("autor" => $Autor,"fecha" => $Fecha,"titulo" => $Titulo,"texto" => $Texto,"id" => $Id,"img" => $imageLink));
                 }
-               // var_dump($modelo);
-               // $this->Post=$modelo;
-                //var_dump($this->Post);
-                /* obtener los valores */
-                /*while ($row = $sentencia->fetch()) {
-                    //$this->Post[]=$row;
-                    array_push($this,$row);
+                //var_dump($c);
+                //var_dump($collection);
 
-                }*/
-                //while ($filas=$sentencia->fetch()) {
-                /* $this->modelo[0]=$Autor;
-                 $this->modelo[1]=$Fecha;
-                 $this->modelo[2]=$Titulo;
-                 $this->modelo[3]=$Texto;
-                 $this->modelo[4]=$id;
-                 $this->modelo[4]=$img;*/
-                //$modelo[]=$filas;
-                //}
             }
         }
         //Devolvemos el resultado en forma de array de objetos=> "$modelo"
         $this->conn->close();
-        //return $modelo;
-        return $this->Post;
+        //return $collection;
+        return $c;
+        //return $this->Post;
     }
 
-    public function seleccComments($tittle)
-    {
-        $this->conn = conexion();
-// Check connection
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        } else {
-//iniciamos el stmt
-            $sentencia = $this->conn->stmt_init();
-            //preparamos el stmt
-            if (!$sentencia->prepare("select * from comentarios where (blog_id=?)")) {//'$tittle'
-                echo "Falló la preparación: (" . $this->conn->errno . ") " . $this->conn->error;
-            } else {
-                mysqli_stmt_bind_param($sentencia, "i", $tittle);
-                if (!($sentencia->execute())) {
-                    return "0";
-                } else {
-                    /* vincular las variables de resultados */
-                    $arraydePosts = array();
-                    $sentencia->bind_result($id, $Titulo, $Autor, $Texto, $blog_id, $fecha);
-                    /* obtener los valores */
-                    while ($sentencia->fetch()) {
-                        array_push($arraydePosts, array(
-                            "titulo" => $Titulo,
-                            "autor" => $Autor,
-                            "texto" => $Texto,
-                            "blog_id" => $id,
-                            "fecha" => $fecha,
-                        ));
-                    }
-                    $this->conn->close();
-                    return $arraydePosts;
-                }
-            }
-        }
-    }
+
 
     /**
      * funcion para recuperar el texto de un blog
@@ -150,37 +111,11 @@ class Post
         }
     }
 
-    public function insertComment($autor, $titulo, $texto)
-    {
-        $Autor = $autor;
-        $Titulo = $titulo;
-        $Texto = $texto;
-        $fecha = date("Y-n-d H:i:s");
-        $this->conn = conexion();
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        } else {
-            //iniciamos el stmt
-            $sentencia = $this->conn->stmt_init();
-            //preparamos el statement (stmt)
-            if (!$sentencia->prepare("INSERT INTO comentarios (autor, blog_id,texto,fecha ) VALUES(?,?,?,?)")) {
-                echo "Falló la preparación: (" . $this->conn->errno . ") " . $this->conn->error;
-            } else {
-                mysqli_stmt_bind_param($sentencia, "siss", $Autor, $Titulo, $Texto, $fecha);
-                if (!($sentencia->execute())) {
-                    return "0";
-                } else {
-                    $this->conn->close();
-                    return "1";
-                }
-            }
-        }
-        //
-    }
 
     public function searchBlog($search)
     {
         $titulo = $search;
+        $collection = array();
         $this->conn = conexion();
         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
@@ -199,7 +134,7 @@ class Post
                     $sentencia->bind_result($Autor, $Fecha, $Titulo, $Texto, $id, $img);
                     /* obtener los valores */
                     while ($sentencia->fetch()) {
-                        array_push($arraydePosts, array(
+                        array_push($collection, array(
                             "autor" => $Autor,
                             "fecha" => $Fecha,
                             "titulo" => $Titulo,
@@ -208,7 +143,7 @@ class Post
                         ));
                     }
                     $this->conn->close();
-                    return $arraydePosts;
+                    return $collection;
                 }
             }
         }

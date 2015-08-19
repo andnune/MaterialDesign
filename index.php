@@ -1,7 +1,8 @@
 <?php
 require 'funcionIndex.php';
 include 'header.html';
-require_once  'model/Model.php';
+require_once 'model/ModelPost.php';
+require_once "collection/Collection.php";
 //require_once ("controller/BlogController.php");
 //cargamos los resultados
 
@@ -48,70 +49,63 @@ require_once  'model/Model.php';
              '</i> no existe</h1></body></html>';
  }*/
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-$blog=new Post();
-$results=$blog->get_blogs();
+$post=new Post();
+$results=$post->get_blogs();
 //require("views/index.php");
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $arrayDch=array();$arrayIzq=array();
-/*var_dump($results);
-var_dump($results[0]);print_r($results[1]);*/
-//$results = seleccTodoBlog();
-//for ($i = 0; $i < count($results); $i++) {
-//while ($row = $results->fetch()) {
-    //array_push($arrayIzq,$row);
-
-     //foreach($blog as $row){
-        // $blog->next();
-    //if ($i % 2 != 0) {
-        //array_push($arrayIzq,array($row->Img,$row->Fecha,$row->Autor,$row->Id,$row->Titulo));
-       // array_push($arrayIzq,$row);
-       // array_push($arrayIzq, $results[$i]);
-   /* } else {
-        //array_push($arrayDch, $blog[$i]);
-        array_push($arrayDch,$row);
-    }*/
-//}
+$cuenta=($results->getCount());
+/*for ($i = 0; $i < $cuenta; $i++) {
+    if ($i%2==0){
+        array_push($arrayIzq,$results[$i]);;
+    }else{
+        array_push($arrayDch,$results[$i]);;
+    }
+}*/
 ?>
+    <? $i=0; ?>
+    <div class="row row1">
+        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
+            <? for($i=0;$i<$cuenta;$i++)://each($results as $blog) :
+                $blog=$results->getItem($i);
+               ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="<? echo $blog['img']/*$blog->Img*/ ?>" class="img-responsive"/>
+                    </div>
+                    <div class="col-lg-8">
+                        <small class="text-muted"><? echo $blog['fecha']/*$blog->Fecha*/ ?>
+                            por <? echo $blog['autor']/*$blog->Autor*/ ?></small>
+                        <h2><a href="post.php?whatever=<? echo $blog['id']/*$blog->Id*/ ?>"><? echo $blog['titulo']/*$blog->Titulo*/ ?></a>
+                        </h2>
+                        <? $textoCorto = $blog['texto']/*$blog->Texto*/;
+                        $textoFinal = substr($textoCorto, 0, 120); ?>
+                        <p><? echo $textoFinal ?></p>
+                    </div>
+                </div>
+                <hr>
+            <? endfor;//endforeach; ?>
+        </div>
+<? //$er=$post->getAlgo("autor"); echo "$er"; $post->modeloAlert(" <-Autor"); ?>
     <!--<div class="row row1">
-        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
-            <? //foreach (/*$arrayIzq*/$results as $blog): ?>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img src="<? //echo /*$post['img']*/$blog->Img ?>" class="img-responsive"/>
-                    </div>
-                    <div class="col-lg-8">
-                        <small class="text-muted"><? //echo /*$post['fecha']*/$blog->Fecha ?>
-                            por <?// echo /*$post['autor']*/$blog->Autor ?></small>
-                        <h2><a href="post.php?whatever=<? //echo /*$post['id']*/$blog->Id ?>"><? //echo /*$post['titulo']*/$blog->Titulo ?></a>
-                        </h2>
-                        <? //$textoCorto = /*$post['texto']*/$blog->Texto;
-                       // $textoFinal = substr($textoCorto, 0, 120); ?>
-                        <p><? //echo $textoFinal ?></p>
-                    </div>
+    <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
+        <? //foreach ($arrayDch as $blog): ?>
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="<?// echo $blog['img']/*$blog->Img*/ ?>" class="img-responsive"/>
                 </div>
-                <hr>
-            <? //endforeach; ?>
-        </div>
-        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
-            <? //foreach ($arrayDch as $post): ?>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img src="<? //echo /*$post['img']*/$blog->Img ?>" class="img-responsive"/>
-                    </div>
-                    <div class="col-lg-8">
-                        <small class="text-muted"><?// echo /*$post['fecha']*/$blog->Fecha ?>
-                            por <?// echo /*$post['autor']*/$blog->Autor ?></small>
-                        <h2><a href="post.php?whatever=<?// echo /*$post['id']*/$blog->Id ?>"><?// echo /*$post['titulo']*/$blog->Id ?></a>
-                        </h2>
-                        <? //$textoCorto = /*$post['texto']*/$blog->Texto;
-                        //$textoFinal = substr($textoCorto, 0, 120); ?>
-                        <p><? //echo $textoFinal ?></p>
-                    </div>
+                <div class="col-lg-8">
+                    <small class="text-muted"><?// echo $blog['fecha']/*$blog->Fecha*/ ?>
+                        por <?// echo $blog['autor']/*$blog->Autor*/ ?></small>
+                    <h2><a href="post.php?whatever=<? //echo $blog['id']/*$blog->Id*/ ?>"><? //echo $blog['titulo']/*$blog->Titulo*/ ?></a>
+                    </h2>
+                    <? //$textoCorto = $blog['texto']/*$blog->Texto*/;
+                   // $textoFinal = substr($textoCorto, 0, 120); ?>
+                    <p><? //echo $textoFinal ?></p>
                 </div>
-                <hr>
-            <?// endforeach; ?>
-        </div>
-    </div>
+            </div>
+            <hr>
+        <? //endforeach; ?>
+    </div>-->
 
 <? include 'footer.html'; ?>

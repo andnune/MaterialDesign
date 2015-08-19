@@ -1,6 +1,6 @@
 <?php
 include ("header.html");
-require_once  'model/Model.php';
+require_once 'model/ModelPost.php';
 if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST['Fecha'] != "")) && (($_REQUEST['Texto'] != ""))) {
     $seguir = 1;
     $autor = $_REQUEST['Autor'];
