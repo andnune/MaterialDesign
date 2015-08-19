@@ -127,7 +127,7 @@ class Post
                     /* obtener los valores */
                     $c = new Collection();
                     while ($sentencia->fetch()) {
-                        $post = new Post(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto,/* "id" => $id,*/ "img" => $img));
+                        $post = new Post(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto, "id" => $id, "img" => $img));
                         /*array_push($collection, array(
                             "autor" => $Autor,
                             "fecha" => $Fecha,
