@@ -2,17 +2,7 @@
 require 'funcionIndex.php';
 include("header.html");
 require_once 'model/ModelPost.php';
-if ((($_REQUEST['search'] != ""))) {
-    $blog=new Post();
-    $results =$blog-> searchBlog($_REQUEST['search']);
-} else {
-    $results = "blanco";
-    echo "<div class='container'><h2>No ha insertado ningun contenido para la busqueda</h2></div>";
-}
-?>
-<!--<? if ($results == 'blanco') : ?>
-<? else: ?>
-    <? if (empty($results)) : ?>
+     if (empty($results)) : ?>
         <h2>No existe el blog deseado</h2>
         <br>
     <? else: ?>
@@ -29,5 +19,4 @@ if ((($_REQUEST['search'] != ""))) {
             </div>
         </div>-->
     <? endif; ?>
-<? endif; ?>
 <? include("footer.html"); ?>
