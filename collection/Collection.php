@@ -1,7 +1,7 @@
 <?php
 class Collection
 {
-    public $items = array();
+    protected $items = array();
 
     public function addItem($obj) {
         $this->items[] = $obj;
@@ -17,9 +17,6 @@ class Collection
         if (isset($this->items[$key])) {
             return $this->items[$key];
         }
-    }
-    public function getCollection() {
-        return $this;
     }
     public function getCount() {
         $count = 0;

@@ -9,7 +9,6 @@ if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST
     $texto = $_REQUEST['Texto'];
     $img = $_REQUEST['Imagen'];
     require 'funcionIndex.php';
-    //$blog=new Post();
     $consulta=Post::insertPost($autor,$titulo,$fecha,$texto,$img);
 } else {
     $seguir = 0;
@@ -17,10 +16,6 @@ if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST
 }
 ?>
 <? if ($seguir == 1) : ?>
-    <? //if ($consulta == 0) : ?>
-        <!--<div class='container'><h2>Error al insertar los datos</h2></div>-->
-    <? //else: ?>
         <? header('Location: http://localhost/primeroPhpStorm/index.php'); ?>
-    <? //endif; ?>
 <? endif; ?>
 <? include ("footer.html"); ?>
