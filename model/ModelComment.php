@@ -11,7 +11,6 @@ class Comment
 
     public function __construct($array)
     {
-        //$this->conn=Model::conexion();
         $this->conn = conexion();
         $this->id = $array['id'];
         $this->autor = $array['autor'];
@@ -27,33 +26,20 @@ class Comment
     {
         $c = new Collection();
         $conn = conexion();
-// Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         } else {
-//iniciamos el stmt
             $sentencia = $conn->stmt_init();
-            //preparamos el stmt
-            if (!$sentencia->prepare("select * from comentarios where (blog_id=?)")) {//'$tittle'
+            if (!$sentencia->prepare("select * from comentarios where (blog_id=?)")) {
                 echo "Falló la preparación: (" . $conn->errno . ") " . $conn->error;
             } else {
                 mysqli_stmt_bind_param($sentencia, "i", $tittle);
                 if (!($sentencia->execute())) {
                     return "0";
                 } else {
-                    /* vincular las variables de resultados */
                     $sentencia->bind_result($Id, $Titulo, $Autor, $Texto, $Blog_id, $Fecha);
-                    /* obtener los valores */
                     while ($sentencia->fetch()) {
                         $comment = new Comment(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto, "id" => $Id, "blog_id" => $Blog_id));
-                        /*array_push($collection, array(
-                            "autor" => $Autor,
-                            "fecha" => $Fecha,
-                            "titulo" => $Titulo,
-                            "texto" => $Texto,
-                            "id" => $Id,
-                            "blog_id" => $Blog_id,
-                        ));*/
                         $c->addItem($comment);
                     }
                     $conn->close();
@@ -64,34 +50,25 @@ class Comment
     }
     public function save()
     {
-        //llamar getter -> $respuesta = getAlgo($algo){
-        //respuesta getter -> a insert($respuesta) BD;
-        //$Autor, $Titulo,  $Texto)
         $Autor = $this->getAlgo('autor');
         $blog_id = $this->getAlgo('blog_id');
         $Texto = $this->getAlgo('texto');
         $Fecha = $this->getAlgo('fecha');
-        /*llamada a insert*/
         $conn = conexion();
-        // Create connection
         if ($conn->connect_error) {
             echo "<h2>";
             die("Connection failed: " . $conn->connect_error);
             echo "</h2>";
         } else {
-            //iniciamos el stmt
             $sentencia = $conn->stmt_init();
-            //preparamos la sentencia
             if (!$sentencia->prepare("INSERT INTO comentarios (autor, blog_id, texto, fecha) VALUES (?, ?, ?, ?)")) {
                 echo "Falló la preparación: (" . $conn->errno . ") " . $conn->error;
             } else {
                 mysqli_stmt_bind_param($sentencia, "siss", $Autor, $blog_id, $Texto,$Fecha);
                 if (!($sentencia->execute())) {
                     $conn->close();
-                    //return "0";
                 } else {
                     $conn->close();
-                    //return '1';
                 }
             }
         }
