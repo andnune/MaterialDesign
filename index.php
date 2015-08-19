@@ -49,8 +49,8 @@ require_once "collection/Collection.php";
              '</i> no existe</h1></body></html>';
  }*/
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$post=new Post();
-$results=$post->get_blogs();
+//$post=new Post();
+$results=Post::getAllPosts();
 //require("views/index.php");
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $arrayDch=array();$arrayIzq=array();
@@ -71,14 +71,14 @@ $cuenta=($results->getCount());
                ?>
                 <div class="row">
                     <div class="col-lg-4">
-                        <img src="<? echo $blog['img']/*$blog->Img*/ ?>" class="img-responsive"/>
+                        <img src="<? echo $blog->getAlgo('img')/*$blog['img']*//*$blog->Img*/ ?>" class="img-responsive"/>
                     </div>
                     <div class="col-lg-8">
-                        <small class="text-muted"><? echo $blog['fecha']/*$blog->Fecha*/ ?>
-                            por <? echo $blog['autor']/*$blog->Autor*/ ?></small>
-                        <h2><a href="post.php?whatever=<? echo $blog['id']/*$blog->Id*/ ?>"><? echo $blog['titulo']/*$blog->Titulo*/ ?></a>
+                        <small class="text-muted"><? echo $blog->getAlgo('fecha')/*$blog['fecha']*//*$blog->Fecha*/ ?>
+                            por <? echo $blog->getAlgo('autor')/*$blog['autor']*//*$blog->Autor*/ ?></small>
+                        <h2><a href="post.php?whatever=<? echo $blog->getAlgo('id')/*$blog['id']*//*$blog->Id*/ ?>"><? echo $blog->getAlgo('titulo')/*$blog['titulo']*//*$blog->Titulo*/ ?></a>
                         </h2>
-                        <? $textoCorto = $blog['texto']/*$blog->Texto*/;
+                        <? $textoCorto = $blog->getAlgo('texto')/*$blog['texto']*//*$blog->Texto*/;
                         $textoFinal = substr($textoCorto, 0, 120); ?>
                         <p><? echo $textoFinal ?></p>
                     </div>

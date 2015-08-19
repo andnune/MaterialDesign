@@ -38,7 +38,7 @@
                 <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-send"></i> Enviar</button>
             </div>
         </div>
-        <input type="hidden" name="id_blog" value="1">
+       <!-- <input type="hidden" name="id_blog" value="1">-->
     </form>
             </div>
         </div>

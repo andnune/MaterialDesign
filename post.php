@@ -5,9 +5,11 @@ require_once 'model/ModelPost.php';
 require_once 'model/ModelComment.php';
 if ((($_GET['whatever'] != ""))) {
     $titulo = $_GET['whatever'];
-    $post=new Post();$comment=new Comment();
-    $results=$post->seleccTexto($titulo);
-    $resultsComments=$comment->seleccComments($titulo);
+    /*$post=new Post();*///$comment=new Comment();
+    //$results=$post->getPost($titulo);
+    $results=Post::getPost($titulo);
+    $resultsComments=Comment::seleccComments($titulo);
+    $cuenta=($resultsComments->getCount());
 }
 ?>
 <? if (empty($results)): ?>
@@ -18,13 +20,13 @@ if ((($_GET['whatever'] != ""))) {
     <!--cargamos los resultados-->
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <img  class="img-responsive imagenPost" src="<? echo /*$results->Img*/$post->Img ?>"/>
-            <small> <? echo /*$results['fecha']*/$post->Fecha ?> por: <? echo /*$results['autor']*/$post->Autor ?></small>
-            <h3><? echo /*$results['titulo']*/$post->Titulo ?></h3>
-            <? echo /*$results['texto']*/$post->Texto ?>
+            <img  class="img-responsive imagenPost" src="<? echo $results->getAlgo('img')/*$results->Img*//*$post->Img*/ ?>"/>
+            <small> <? echo /*$results['fecha']*//*$post->Fecha*/$results->getAlgo('fecha') ?> por: <? echo $results->getAlgo('autor')/*$results['autor']*//*$post->Autor*/ ?></small>
+            <h3><? echo $results->getAlgo('titulo')/*$results['titulo']*//*$post->Titulo*/ ?></h3>
+            <? echo $results->getAlgo('texto')/*$results['texto']*//*$post->Texto*/ ?>
 
-            <? $post->rellenar($post->Id,$post->Autor,$post->Texto,$post->Fecha,$post->Img,$post->Titulo); ?>
-            <? $ser2=$post->getAlgo("titulo"); echo "aaaaaa-- $ser2 --aaaaa"; $post->modeloAlert(" <-Ser2"); //echo ($post->Texto); ?>
+            <? //$post->rellenar($post->Id,$post->Autor,$post->Texto,$post->Fecha,$post->Img,$post->Titulo); ?>
+            <? //$ser2=$post->getAlgo("titulo"); echo "aaaaaa-- $ser2 --aaaaa"; $post->modeloAlert(" <-Ser2"); //echo ($post->Texto); ?>
             <!-- cargamos el formulario de añadir comentarios-->
             <hr>
             <h4>Nuevo comentario:</h4>
@@ -47,25 +49,29 @@ if ((($_GET['whatever'] != ""))) {
                         <button type="submit" class="btn btn-success"><i class='glyphicon glyphicon-send'></i> Enviar</button>
                     </div>
                 </div>
-                <input type='hidden' name='id_blog' value="<? echo /*$results['id']*/$post->Id ?>">
+                <input type='hidden' name='id_blog' value="<? echo $results->getAlgo('id')/*$results['id']*//*$post->Id*/ ?>"><? //echo $results->getAlgo('id') ?>
             </form>
             <hr>
 
             <!-- ZONA COMMENTS-->
             <h4 id="Comentarios">Comentarios:</h4>
-            <? if (empty($resultsComments)) : ?>
-                <h2>No hay comentarios almacenados</h2>
+            <? if (($cuenta==0)) : ?>
+            <h2>No hay comentarios almacenados</h2>
             <? else: ?>
+            <? for($i=0;$i<$cuenta;$i++)://each($results as $blog) :
+            $comment=$resultsComments->getItem($i);
+            ?>
 
-                <? foreach ($resultsComments as $comment): ?>
+
+                <? //foreach ($resultsComments as $comment): ?>
                     <div class='list-group'>
                         <a class="list-group-item ">
-                            <small class="pull-right"><? echo "Fecha: " . $comment['fecha'] ?></small><h4 id="autor" class="list-group-item-heading"><i class="glyphicon glyphicon-user"></i>  <? echo "Autor: " . $comment['autor'] ?></h4>
+                            <small class="pull-right"><? echo "Fecha: " . $comment->getAlgo('fecha')/*$comment['fecha']*/ ?></small><h4 id="autor" class="list-group-item-heading"><i class="glyphicon glyphicon-user"></i>  <? echo "Autor: " . $comment->getAlgo('texto')/*$comment['autor']*/ ?></h4>
 
-                            <p class="list-group-item-text"><i class='fa fa-user'></i><? echo "Texto: " . $comment['texto'] ?></p>
+                            <p class="list-group-item-text"><i class='fa fa-user'></i><? echo "Texto: " . $comment->getAlgo('texto')/*$comment['texto']*/ ?></p>
                         </a>
                     </div>
-                <? endforeach; ?>
+                <? endfor;//endforeach; ?>
             <? endif; ?>
         </div>
     </div>

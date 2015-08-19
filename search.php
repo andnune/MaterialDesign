@@ -3,8 +3,9 @@ require 'funcionIndex.php';
 include("header.html");
 require_once 'model/ModelPost.php';
 if ((($_REQUEST['search'] != ""))) {
-    $blog=new Post();
-    $results =$blog-> searchBlog($_REQUEST['search']);
+    //$blog=new Post();
+    $results = Post::searchPost($_REQUEST['search']);
+    $cuenta = ($results->getCount());
 } else {
     $results = "blanco";
     echo "<div class='container'><h2>No ha insertado ningun contenido para la busqueda</h2></div>";
@@ -18,16 +19,27 @@ if ((($_REQUEST['search'] != ""))) {
     <? else: ?>
         <div class="row">
             <div class="col-lg-8">
-                <? foreach ($results as $post): ?>
-                    <h4><a href="post.php?whatever=<? echo $post['blog_id'] ?>"><? echo $post['titulo'] ?></a></h4>
-                    <small class="text-muted"><? echo $post['fecha'] ?> por <? echo $post['autor'] ?></small>
-                    <? $textoCorto = $post['texto'];
+                <? for ($i = 0; $i < $cuenta; $i++)://each($results as $blog) :
+                    $post = $results->getItem($i);
+                    ?>
+                    <? //foreach ($results as $post):
+                    ?>
+                    <h4>
+                        <a href="post.php?whatever=<? echo $post->getAlgo('id')/*$post['blog_id']*/ ?>"><? echo $post->getAlgo('titulo')/*$post['titulo']*/ ?></a>
+                    </h4>
+                    <small class="text-muted"><? echo $post->getAlgo('fecha')/*$post['fecha']*/ ?>
+                        por <? echo $post->getAlgo('autor')/*$post['autor']*/ ?></small>
+                    <? $textoCorto = $post->getAlgo('texto')/*$post['texto']*/
+                ;
                     $textoFinal = substr($textoCorto, 0, 120); ?>
                     <p><? echo $textoFinal ?></p>
                     <hr>
-                <? endforeach; ?>
+                    <? //endforeach;
+                    ?>
+                <? endfor; ?>
             </div>
         </div>
+
     <? endif; ?>
 <? endif; ?>
 <? include("footer.html"); ?>
