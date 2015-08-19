@@ -8,8 +8,7 @@ if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Texto'] != ""))  && (($_REQUEST
     $autor = $_REQUEST['Autor'];
     $texto = $_REQUEST['Texto'];
     $id_blog = $_REQUEST['id_blog'];
-   // $comment=new Comment();
-    /*$consulta =*/ Comment::insertComment($autor,$id_blog,$texto);
+    Comment::insertComment($autor,$id_blog,$texto);
 } else {
     $seguir = 0;
     echo "<div class='container'><h2> Los datos no pueden  quedar sin rellenar </h2></div>";

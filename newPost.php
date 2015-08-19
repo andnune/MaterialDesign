@@ -34,11 +34,10 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-11"> <!-- offset para dejar en blanco-->
+            <div class="col-sm-offset-1 col-sm-11">
                 <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-send"></i> Enviar</button>
             </div>
         </div>
-       <!-- <input type="hidden" name="id_blog" value="1">-->
     </form>
             </div>
         </div>
