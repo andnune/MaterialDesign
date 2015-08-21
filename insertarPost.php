@@ -12,7 +12,8 @@ if ((($_REQUEST['Autor'] != "")) && (($_REQUEST['Titulo'] != "")) && (($_REQUEST
     $consulta=Post::insertPost($autor,$titulo,$fecha,$texto,$img);
 } else {
     $seguir = 0;
-    echo "<div class='container'><h2>Fallo en los datos a insertar</h2></div>";
+    echo "<div class='demo-container mdl-grid'><div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone'>
+    </div><h2>Fallo en los datos a insertar</h2></div>";
 }
 ?>
 <? if ($seguir == 1) : ?>

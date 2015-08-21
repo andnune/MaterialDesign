@@ -36,11 +36,9 @@ if ((($_GET['whatever'] != ""))) {
         <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
         <div class="mdl-cell mdl-cell--6-col">
         <h4><i class="material-icons">add_box</i>Nuevo comentario: </h4>
-        <!--<div class="demo-container mdl-grid">
-            <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>-->
             <form action="insertarComentario.php" method="post" class="mdl-cell--6-col">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[a-z]*(\.[a-z]+)?" name="Autor"
+                    <input class="mdl-textfield__input" type="text" pattern="[a-zA-Z,#.-\s]+" name="Autor"
                            id="Autor"/>
                     <label class="mdl-textfield__label" for="Autor" name="Autor">Autor</label>
                     <span class="mdl-textfield__error">Input is not a string!</span>
@@ -49,8 +47,8 @@ if ((($_GET['whatever'] != ""))) {
                 <!-- Numeric Textfield with Floating Label -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />-->
-                    <input class="mdl-textfield__input" type="text" pattern="-?[a-z]*(\.[a-z]+)?" name="Texto"
-                           id="Texto"/>
+                    <input class="mdl-textfield__input" type="text" pattern="[a-zA-Záéíóú,#.-\s]+" name="Texto"
+                           id="Texto"/><!-- pattern="-?[a-z]*(\.[a-z]+)?"-->
                     <label class="mdl-textfield__label" for="Texto" name="Texto">Texto</label>
                     <span class="mdl-textfield__error">Input is not a string!</span>
                 </div>
@@ -83,7 +81,8 @@ if ((($_GET['whatever'] != ""))) {
             <div class="blog-card-wide1 mdl-card mdl-shadow--2dp">
                 <!--<div>-->
             <div class="mdl-card__title">
-                <p class="mdl-card__title-text"><? echo "Fecha: " . $comment->getAlgo('fecha') ?></p>
+                <!--<p class="mdl-card__title-text"><? //echo "Fecha: " . $comment->getAlgo('fecha') ?></p>-->
+                <p><? echo "Fecha: " . $comment->getAlgo('fecha') ?></p>
             </div>
             <div class="mdl-card__supporting-text">
                 <p id="autor"><i class="material-icons">face</i>

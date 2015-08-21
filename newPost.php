@@ -6,23 +6,26 @@
         <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
     <form method="post" id="formInsertarPost" action="insertarPost.php" class="mdl-cell--6-col">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" name="Autor" pattern="-?[a-z]*(\.[a-z]+)?" id="inputAutor" />
+            <input class="mdl-textfield__input" type="text" name="Autor" pattern="[a-zA-Z,#.-\s]+" id="inputAutor" />
             <label class="mdl-textfield__label" for="Autor">Autor</label>
             <span class="mdl-textfield__error">Input is not a string!</span>
         </div><br>
     <!-- Numeric Textfield with Floating Label -->
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
            <!-- <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />-->
-            <input class="mdl-textfield__input" type="text" name="Texto" id="inputTexto" />
+            <input class="mdl-textfield__input" type="text" pattern="[a-zA-Z0-9áéíóú,#.-\s]+" name="Texto" id="inputTexto" />
             <label class="mdl-textfield__label" for="Texto">Texto</label>
+            <span class="mdl-textfield__error">Input is not a string!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" name="Fecha" id="inputFecha" />
+            <input class="mdl-textfield__input" type="text" pattern="[0-9,#.-\s]+" name="Fecha" id="inputFecha" />
             <label class="mdl-textfield__label" for="Fecha">Fecha</label>
+            <span class="mdl-textfield__error">Input is not a string!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" name="Titulo" type="text"  id="inputTitulo" />
+            <input class="mdl-textfield__input" pattern="[a-zA-Z0-9,#.-\s]+" name="Titulo" type="text"  id="inputTitulo" />
             <label class="mdl-textfield__label" for="Titulo">Titulo</label>
+            <span class="mdl-textfield__error">Input is not a string!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" name="Imagen" type="text" id="inputImagen" />

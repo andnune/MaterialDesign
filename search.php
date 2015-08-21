@@ -6,13 +6,14 @@ if ((($_REQUEST['search'] != ""))) {
     $results = Post::searchPost($_REQUEST['search']);
     $cuenta = ($results->getCount());
 } else {
+    $cuenta =0;
     $results = "blanco";
     echo " <div class='demo-container mdl-grid'>
         <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone'></div>
         <h2>No ha insertado ningun contenido para la busqueda</h2></div>";
 }
 ?>
-<? if (($results == 'blanco') || ($results->getCount()==0)) : ?>
+<? if (($results != 'blanco') && ($results->getCount()==0)) : ?>
     <div class="demo-container mdl-grid">
         <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
         <h2>No existe el blog deseado</h2></div>
