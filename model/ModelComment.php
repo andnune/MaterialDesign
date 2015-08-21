@@ -8,11 +8,10 @@ class Comment
     private $texto;
     private $blog_id;
     private $fecha;
-
     public function __construct($array)
     {
         $this->conn = conexion();
-        $this->id = $array['id'];
+        //$this->id = $array['id'];
         $this->autor = $array['autor'];
         $this->texto = $array['texto'];
         $this->fecha = $array['fecha'];
@@ -73,7 +72,6 @@ class Comment
             }
         }
     }
-
     public static function insertComment($autor, $blog_id, $texto)
     {
         $fecha = date("Y-n-d H:i:s");

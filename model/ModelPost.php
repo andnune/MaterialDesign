@@ -1,6 +1,5 @@
 <?php
 require_once "collection/Collection.php";
-
 class Post
 {
     private $conn;
@@ -10,7 +9,6 @@ class Post
     private $fecha;
     private $img;
     private $titulo;
-
     public function __construct($array)
     {
         $this->conn = conexion();
@@ -21,7 +19,6 @@ class Post
         $this->img = $array['img'];
         $this->titulo = $array['titulo'];
     }
-
     public function getAlgo($algo)
     {
         return ($this->$algo);
@@ -42,14 +39,11 @@ class Post
                     $post = new Post(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto, "id" => $Id, "img" => $imageLink));
                     $c->addItem($post);
                 }
-
             }
         }
         $conn->close();
         return $c;
     }
-
-
     /**
      * funcion para recuperar el texto de un blog
      * User: andrescloudman
@@ -78,8 +72,6 @@ class Post
             }
         }
     }
-
-
     public static function searchPost($search)
     {
         $titulo = $search;
@@ -97,7 +89,7 @@ class Post
                     $sentencia->bind_result($Autor, $Fecha, $Titulo, $Texto, $id, $img);
                     $c = new Collection();
                     while ($sentencia->fetch()) {
-                        $post = new Post(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto, "img" => $img));
+                        $post = new Post(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto, "id" => $id, "img" => $img));
                         $c->addItem($post);
                     }
                     $conn->close();
@@ -106,7 +98,6 @@ class Post
             }
         }
     }
-
     public function save()
     {
         $Autor = $this->getAlgo('autor');
@@ -133,11 +124,9 @@ class Post
             }
         }
     }
-
     public static function insertPost($Autor, $Titulo, $Fecha, $Texto, $img)
     {
-        $post = new Post(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto, "img" => $img));
+        $post = new Post(array("autor" => $Autor, "fecha" => $Fecha, "titulo" => $Titulo, "texto" => $Texto, "img" => $img, "id" => ""));
         $post->save();
     }
-
 }
