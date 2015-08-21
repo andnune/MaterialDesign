@@ -1,31 +1,45 @@
 <?php
 require 'funcionIndex.php';
 include("header.html");
-if ((($_REQUEST['search'] != "")) && $_REQUEST['search'] != " ") {
-    $results = searchBlog($_REQUEST['search']);
+require_once 'model/ModelPost.php';
+if ((($_REQUEST['search'] != ""))) {
+    $results = Post::searchPost($_REQUEST['search']);
+    $cuenta = ($results->getCount());
 } else {
+    $cuenta =0;
     $results = "blanco";
-    echo "<div class='container'><h2>No ha insertado ningun contenido para la busqueda</h2></div>";
+    echo " <div class='demo-container mdl-grid'>
+        <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone'></div>
+        <h2>No ha insertado ningun contenido para la busqueda</h2></div>";
 }
 ?>
-<? if ($results == 'blanco') : ?>
+<? if (($results != 'blanco') && ($results->getCount()==0)) : ?>
+    <div class="demo-container mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        <h2>No existe el blog deseado</h2></div>
 <? else: ?>
-    <? if (empty($results)) : ?>
-        <h2>No existe el blog deseado</h2>
-        <br>
-    <? else: ?>
-        <div class="row">
-            <div class="col-lg-8">
-                <? foreach ($results as $post): ?>
-                    <h4><a href="post.php?whatever=<? echo $post['blog_id'] ?>"><? echo $post['titulo'] ?></a></h4>
-                    <small class="text-muted"><? echo $post['fecha'] ?> por <? echo $post['autor'] ?></small>
-                    <? $textoCorto = $post['texto'];
-                    $textoFinal = substr($textoCorto, 0, 120); ?>
-                    <p><? echo $textoFinal ?></p>
-                    <hr>
-                <? endforeach; ?>
+            <? for ($i = 0; $i < $cuenta; $i++):
+                $post = $results->getItem($i);
+                ?>
+            <div class="demo-container mdl-grid">
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+                <div class="blog-card-wide1 mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                            <a class="mdl-card__title-text"
+                               href="post.php?whatever=<? echo $post->getAlgo('id') ?>"><? echo $post->getAlgo('titulo') ?></a>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <small class="text-muted"><? echo $post->getAlgo('fecha') ?>
+                            por <? echo $post->getAlgo('autor') ?></small>
+                        <? $textoCorto = $post->getAlgo('texto');
+                        $textoFinal = substr($textoCorto, 0, 120); ?>
+                        <p><? echo $textoFinal ?></p>
+                    </div>
+                </div>
+                <hr>
             </div>
-        </div>
-    <? endif; ?>
+            <? endfor; ?>
+
+
 <? endif; ?>
 <? include("footer.html"); ?>

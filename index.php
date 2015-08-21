@@ -1,44 +1,37 @@
 <?php
 require 'funcionIndex.php';
 include 'header.html';
-//cargamos los resultados
-$results = seleccTodoBlog();
+require_once 'model/ModelPost.php';
+require_once "collection/Collection.php";
+$results = Post::getAllPosts();
+$cuenta = ($results->getCount());
 ?>
+<? $i = 0; ?>
 
-    <div class="row">
-        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
-        <? foreach ($results as $post): ?>
-    <div class="row" >
-        <div class="col-lg-4">
-            <img src="<? echo $post['img'] ?>" class="img-responsive"/>
-            </div>
-        <div class="col-lg-8">
-            <small class="text-muted"><? echo $post['fecha'] ?> por <? echo $post['autor'] ?></small>
-            <h2><a href="post.php?whatever=<?  echo $post['id'] ?>"><? echo $post['titulo'] ?></a></h2>
-            <? $textoCorto = $post['texto'];
-            $textoFinal = substr($textoCorto, 0, 120); ?>
-            <p><? echo $textoFinal ?></p>
-        </div>
-    </div>
-            <hr>
-        <? endforeach; ?>
-       <!-- </div>
-        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
-            <? //foreach ($results as $post): ?>
-                <div class="row" >
-                    <div class="col-lg-4">
-                        <img src="<? //echo $post['img'] ?>" class="img-responsive"/>
-                    </div>
-                    <div class="col-lg-8">
-                        <small class="text-muted"><? //echo $post['fecha'] ?> por <? //echo $post['autor'] ?></small>
-                        <h2><a href="post.php?whatever=<?  //echo $post['id'] ?>"><? //echo $post['titulo'] ?></a></h2>
-                        <? //$textoCorto = $post['texto'];
-                       // $textoFinal = substr($textoCorto, 0, 120); ?>
-                        <p><? //echo $textoFinal ?></p>
-                    </div>
+<? for ($i = 0; $i < $cuenta; $i++):
+    $blog = $results->getItem($i);
+    ?>
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+            <div class="blog-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title"
+                     style="background: url('<? echo $blog->getAlgo('img') ?>') center / cover;">
+                    <h2 class="mdl-card__title-text"><? echo $blog->getAlgo('titulo') ?></h2>
                 </div>
-                <hr>
-            <? //endforeach; ?>
-       --> </div>
+                <div class="mdl-card__supporting-text">
+                    <? $textoCorto = $blog->getAlgo('texto');
+                    $textoFinal = substr($textoCorto, 0, 120); ?>
+                    <p><? echo $textoFinal ?></p>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       href="post.php?whatever=<? echo $blog->getAlgo('id') ?>">
+                        Leer Mas
+                    </a>
+                </div>
+            </div>
     </div>
+<? endfor; ?>
+
+
 <? include 'footer.html'; ?>

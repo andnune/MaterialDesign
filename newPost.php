@@ -1,14 +1,45 @@
 <? include ("header.html"); ?>
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-<h4>Nuevo post:</h4>
-    <form class="form-horizontal" id="formInsertarPost" action="insertarPost.php" method="post">
-        <div class="form-group">
-            <label for="inputAutor" class="col-sm-1 control-label">Autor</label>
-            <div class="col-sm-11">
-                <input type="text" class="form-control" id="inputAutor" placeholder="Autor" name="Autor">
-            </div>
+    <div class="demo-container mdl-grid">
+     <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+    <h4 class="mdl-cell--6-col">Nuevo post: </h4>
+    <div class="demo-container mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+    <form method="post" id="formInsertarPost" action="insertarPost.php" class="mdl-cell--6-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" name="Autor" pattern="[a-zA-Z,#.-\s]+" id="inputAutor" />
+            <label class="mdl-textfield__label" for="Autor">Autor</label>
+            <span class="mdl-textfield__error">Input is not a string!</span>
+        </div><br>
+    <!-- Numeric Textfield with Floating Label -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+           <!-- <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />-->
+            <input class="mdl-textfield__input" type="text" pattern="[a-zA-Z0-9áéíóú,#.-\s]+" name="Texto" id="inputTexto" />
+            <label class="mdl-textfield__label" for="Texto">Texto</label>
+            <span class="mdl-textfield__error">Input is not a string!</span>
         </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" pattern="[0-9,#.-\s]+" name="Fecha" id="inputFecha" />
+            <label class="mdl-textfield__label" for="Fecha">Fecha</label>
+            <span class="mdl-textfield__error">Input is not a string!</span>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" pattern="[a-zA-Z0-9,#.-\s]+" name="Titulo" type="text"  id="inputTitulo" />
+            <label class="mdl-textfield__label" for="Titulo">Titulo</label>
+            <span class="mdl-textfield__error">Input is not a string!</span>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" name="Imagen" type="text" id="inputImagen" />
+            <label class="mdl-textfield__label" for="Imagen">Imagen</label>
+        </div>
+        <div>
+         <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">create</i></button>
+        </div>
+    </form>
+        </div>
+ </div>
+
+
+    <!--<form class="form-horizontal" id="formInsertarPost" action="insertarPost.php" method="post">
         <div class="form-group">
             <label for="inputFecha" class="col-sm-1 control-label">Fecha</label>
             <div class="col-sm-11">
@@ -34,12 +65,9 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-11"> <!-- offset para dejar en blanco-->
+            <div class="col-sm-offset-1 col-sm-11">
                 <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-send"></i> Enviar</button>
             </div>
         </div>
-        <input type="hidden" name="id_blog" value="1">
-    </form>
-            </div>
-        </div>
+    </form>-->
 <? include ("footer.html"); ?>
