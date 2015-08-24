@@ -40,11 +40,6 @@ a.list-group-item {
     padding-left: 40px;
 }
 
-/*.demo-container {
-    max-width: 1600px;
-    width: calc(100% - 16px);
-    margin: 0 auto;
-}*/
 
 .demo-content {
     border-radius: 2px;
@@ -87,4 +82,10 @@ a.list-group-item {
 }
 .blog-card-wide > .mdl-card__menu {
     color: #fff;
+}
+.froala-editor {
+    background: #F5F5F5;
+}
+.froala-wrapper.f-basic {
+    background: #F5F5F5;
 }

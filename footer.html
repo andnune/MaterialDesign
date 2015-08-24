@@ -2,6 +2,34 @@
 </div>
 </div>
 
+<script>
+    $(document).ready(function(){
 
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="libWYSIWYG/js/froala_editor.min.js"></script>
+<script src="libWYSIWYG/js/plugins/fullscreen.min.js"></script>
+<script src="libWYSIWYG/js/plugins/tables.min.js"></script>
+<script src="libWYSIWYG/js/plugins/lists.min.js"></script>
+<script src="libWYSIWYG/js/plugins/colors.min.js"></script>
+<link rel="stylesheet" type="text/css" href="estilos.css">
+<script>
+    $texto= "<b>Introduzca el texto...</b>";
+    $(function(){
+        $('textarea#edit').editable({
+//            inlineMode: false,
+            inlineMode: false,
+            //width:750,
+            height: 350,
+            //alwaysVisible: true,
+            placeholder: 'Introduzca el texto...',
+           toolbarFixed: false,
+            allowedAttrs: ['title', 'href', 'alt', 'src', 'style','accept','accept-charset','list']
+           // editInPopup: true
+        })
+    });
+</script>
 </body>
 </html>

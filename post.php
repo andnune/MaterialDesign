@@ -39,19 +39,21 @@ if ((($_GET['whatever'] != ""))) {
         <h4><i class="material-icons">add_box</i>Nuevo comentario: </h4>
             <form action="insertarComentario.php" method="post" class="mdl-cell--6-col">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="[a-zA-Z,#.-\s]+" name="Autor"
+                    <input class="mdl-textfield__input" type="text"  name="Autor"
                            id="Autor"/>
                     <label class="mdl-textfield__label" for="Autor" name="Autor">Autor</label>
                     <span class="mdl-textfield__error">Input is not a string!</span>
                 </div>
-                <br>
+
                 <!-- Numeric Textfield with Floating Label -->
+<!--                Texto:-->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <!-- <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />-->
-                    <input class="mdl-textfield__input" type="text" pattern="[a-zA-Záéíóú,#.-\s]+" name="Texto"
-                           id="Texto"/><!-- pattern="-?[a-z]*(\.[a-z]+)?"-->
-                    <label class="mdl-textfield__label" for="Texto" name="Texto">Texto</label>
+<!--                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />-->
+<!--                    <textarea rows= "15" cols="50" name="Texto" id="inputTexto"></textarea>-->
+                            <textarea class="mdl-textfield__input" type="text" name="Texto" id="inputTexto" ><? //echo $results->getAlgo('texto') ?></textarea>
+                        <label class="mdl-textfield__label" for="Texto" name="Texto">Texto</label>
                     <span class="mdl-textfield__error">Input is not a string!</span>
+                        <!--</div>-->
                 </div>
                 <div>
                     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
@@ -62,6 +64,7 @@ if ((($_GET['whatever'] != ""))) {
       </div>
     </div>
     <hr>
+
     <div class="demo-container mdl-grid">
         <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
         <h4 id="Comentarios"><i class="material-icons">list</i>Comentarios:</h4></div>
