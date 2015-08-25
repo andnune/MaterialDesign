@@ -12,8 +12,10 @@ $cuenta = ($results->getCount());
     $blog = $results->getItem($i);
     ?>
     <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-        <div class="blog-card-wide mdl-card mdl-cell--4-col mdl-shadow--2dp">
+        <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        <div class="mdl-cell mdl-cell--1-col  mdl-cell--hide-phone"></div>
+        <div class="mdl-cell mdl-cell--1-col  mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        <div class="blog-card-wide mdl-cell mdl-cell--6-col mdl-shadow--2dp">
             <div class="mdl-card__title"
                  style="background: url('<? echo $blog->getAlgo('img') ?>') center / cover;">
                 <h2 class="mdl-card__title-text"><? echo $blog->getAlgo('titulo') ?></h2>

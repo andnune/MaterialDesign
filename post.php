@@ -9,6 +9,7 @@ if ((($_GET['whatever'] != ""))) {
     $resultsComments = Comment::seleccComments($titulo);
     $cuenta = ($resultsComments->getCount());
 }
+
 ?>
 <? if (empty($results)): ?>
     <h2>Error al seleccionar los datos</h2>
@@ -35,7 +36,7 @@ if ((($_GET['whatever'] != ""))) {
     <div class="demo-container mdl-grid">
         <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
         <div class="mdl-cell mdl-cell--6-col">
-        <h4><i class="material-icons">add_box</i>Nuevo comentario: </h4>
+            <h4><i class="material-icons">add_box</i>Nuevo comentario: </h4>
             <form action="insertarComentario.php" method="post" class="mdl-cell--6-col">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text"  name="Autor"
@@ -45,14 +46,14 @@ if ((($_GET['whatever'] != ""))) {
                 </div>
 
                 <!-- Numeric Textfield with Floating Label -->
-<!--                Texto:-->
+                <!--                Texto:-->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-<!--                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />-->
-<!--                    <textarea rows= "15" cols="50" name="Texto" id="inputTexto"></textarea>-->
-                            <textarea class="mdl-textfield__input" type="text" name="Texto" id="inputTexto" ><? //echo $results->getAlgo('texto') ?></textarea>
-                        <label class="mdl-textfield__label" for="Texto" name="Texto">Texto</label>
+                    <!--                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />-->
+                    <!--                    <textarea rows= "15" cols="50" name="Texto" id="inputTexto"></textarea>-->
+                    <textarea class="mdl-textfield__input" type="text" name="Texto" id="inputTexto" ><? //echo $results->getAlgo('texto') ?></textarea>
+                    <label class="mdl-textfield__label" for="Texto" name="Texto">Texto</label>
                     <span class="mdl-textfield__error">Input is not a string!</span>
-                        <!--</div>-->
+                    <!--</div>-->
                 </div>
                 <div>
                     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
@@ -60,7 +61,7 @@ if ((($_GET['whatever'] != ""))) {
                 </div>
                 <input type='hidden' name='id_blog' value="<? echo $results->getAlgo('id') ?>">
             </form>
-      </div>
+        </div>
     </div>
     <hr>
 
@@ -83,21 +84,21 @@ if ((($_GET['whatever'] != ""))) {
             <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
             <div class="blog-card-wide1 mdl-card mdl-shadow--2dp">
                 <!--<div>-->
-            <div class="mdl-card__title">
-                <!--<p class="mdl-card__title-text"><? //echo "Fecha: " . $comment->getAlgo('fecha') ?></p>-->
-                <p><? echo "Fecha: " . $comment->getAlgo('fecha') ?></p>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <p id="autor"><i class="material-icons">face</i>
-                    <? echo "Autor: " . $comment->getAlgo('autor') ?></p>
+                <div class="mdl-card__title">
+                    <!--<p class="mdl-card__title-text"><? //echo "Fecha: " . $comment->getAlgo('fecha') ?></p>-->
+                    <p><? echo "Fecha: " . $comment->getAlgo('fecha') ?></p>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p id="autor"><i class="material-icons">face</i>
+                        <? echo "Autor: " . $comment->getAlgo('autor') ?></p>
 
-                <p id="texto"><i class="material-icons">receipt</i>
-                    <? echo "Texto: " . $comment->getAlgo('texto') ?></p>
-            </div>
+                    <p id="texto"><i class="material-icons">receipt</i>
+                        <? echo "Texto: " . $comment->getAlgo('texto') ?></p>
+                </div>
 
-            <!--<div class="mdl-card__supporting-text"><i class="material-icons">receipt</i>
-            </div>-->
-            <!-- </div>-->
+                <!--<div class="mdl-card__supporting-text"><i class="material-icons">receipt</i>
+                </div>-->
+                <!-- </div>-->
             </div>
             <hr>
         </div>
